@@ -54,10 +54,31 @@ jobs:
               "https://api.github.com/repos/${owner}/${repo}/pages")
           fi
 
-          if [ "$response" != "200" ] && [ "$response" != "201" ] && [ "$response" != "204" ]; then
-            cat /tmp/pages.json
+          if [ "$response" = "204" ]; then
+            echo "GitHub Pages source configured successfully (204 No Content)."
+            exit 0
+          fi
+
+          if [ "$response" != "200" ] && [ "$response" != "201" ]; then
             echo "GitHub Pages configuration API call failed with status $response"
+            cat /tmp/pages.json
             exit 1
           fi
 
-          cat /tmp/pages.json
+          if [ -s /tmp/pages.json ]; then
+            python - <<'PY'
+import json
+from pathlib import Path
+path = Path('/tmp/pages.json')
+try:
+    data = json.loads(path.read_text())
+    source = data.get('source') or {}
+    branch = source.get('branch', '<unknown>')
+    path_val = source.get('path', '<unknown>')
+    print(f'GitHub Pages source configured: {branch}{path_val}')
+except Exception as e:
+    print(f'GitHub Pages source configured; response JSON could not be parsed: {e}')
+PY
+          else
+            echo "GitHub Pages source configured successfully."
+          fi
