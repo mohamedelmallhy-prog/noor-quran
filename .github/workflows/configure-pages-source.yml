@@ -32,11 +32,11 @@ jobs:
             };
 
             try {
-              const response = await github.rest.repos.updatePagesSite(params);
+              const response = await github.request('PUT /repos/{owner}/{repo}/pages', params);
               core.info(`GitHub Pages source set: ${response.data.source.branch}/${response.data.source.path}`);
             } catch (error) {
               if (error.status === 404) {
-                const response = await github.rest.repos.createPagesSite(params);
+                const response = await github.request('POST /repos/{owner}/{repo}/pages', params);
                 core.info(`GitHub Pages source created: ${response.data.source.branch}/${response.data.source.path}`);
               } else {
                 throw error;
