@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Headphones, BookOpen, Sparkles, BookOpenCheck } from 'lucide-react';
 import DuaCard from '../components/DuaCard';
 
 const HomePage = () => {
+  const [sampleAnswer, setSampleAnswer] = useState(null);
+  const [sampleResult, setSampleResult] = useState(null);
+
+  const sampleQuiz = {
+    question: 'ما عدد أركان الإسلام؟',
+    options: ['ثلاثة', 'أربعة', 'خمسة', 'ستة'],
+    correct: 2,
+  };
+
+  const handleSampleAnswer = (index) => {
+    setSampleAnswer(index);
+    setSampleResult(index === sampleQuiz.correct ? 'correct' : 'wrong');
+  };
+
+  const resetSampleQuiz = () => {
+    setSampleAnswer(null);
+    setSampleResult(null);
+  };
+
   const features = [
     {
       icon: Headphones,
@@ -148,6 +167,93 @@ const HomePage = () => {
                     <p className="text-gray-300 leading-relaxed">{info.value}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-950">
+        <div className="mx-auto max-w-6xl text-right">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="glass-dark rounded-[2rem] border border-gold-500/15 p-10 sm:p-12"
+          >
+            <div className="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between">
+              <div className="max-w-2xl">
+                <p className="text-sm text-gold-200 uppercase tracking-[0.3em] mb-4">نظرة سريعة</p>
+                <h2 className="text-3xl font-bold text-white">تجربة الاختبار الإسلامي داخل الصفحة</h2>
+                <p className="mt-4 text-gray-400 leading-relaxed">
+                  جرّب سؤالاً واحداً مباشرةً هنا قبل الانتقال إلى صفحة الاختبار الكامل. النظام يعمل بخيارات متعددة، مستويات سهلة ومتوسطة وصعبة، وتقييم نتيجة واضح.
+                </p>
+              </div>
+
+              <div className="rounded-[2rem] border border-gold-500/10 bg-dark-900/80 p-6 shadow-2xl shadow-black/20">
+                <div className="mb-4 text-right">
+                  <p className="text-sm text-gray-400 uppercase tracking-[0.2em]">سؤال تجريبي</p>
+                  <h3 className="text-2xl font-bold text-white">{sampleQuiz.question}</h3>
+                </div>
+
+                <div className="space-y-4">
+                  {sampleQuiz.options.map((option, index) => {
+                    const isSelected = sampleAnswer === index;
+                    const isCorrect = sampleResult === 'correct' && isSelected;
+                    const isWrong = sampleResult === 'wrong' && isSelected;
+
+                    return (
+                      <motion.button
+                        key={index}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => handleSampleAnswer(index)}
+                        className={`w-full text-right rounded-2xl border px-5 py-4 font-semibold transition-all ${
+                          isCorrect
+                            ? 'bg-green-500/15 border-green-500 text-green-200'
+                            : isWrong
+                            ? 'bg-red-500/15 border-red-500 text-red-200'
+                            : 'bg-dark-950 border-gold-500/10 text-gray-300 hover:border-gold-500/40'
+                        }`}
+                      >
+                        <span className="flex items-center justify-between gap-3">
+                          <span>{option}</span>
+                          {isCorrect && <span className="text-lg">✓</span>}
+                          {isWrong && <span className="text-lg">✗</span>}
+                        </span>
+                      </motion.button>
+                    );
+                  })}
+                </div>
+
+                {sampleResult && (
+                  <div className={`mt-5 rounded-2xl p-4 text-right font-semibold ${
+                    sampleResult === 'correct'
+                      ? 'bg-green-500/15 border border-green-500/30 text-green-100'
+                      : 'bg-red-500/15 border border-red-500/30 text-red-100'
+                  }`}>
+                    {sampleResult === 'correct'
+                      ? 'إجابة صحيحة! هذه هي طريقة عمل النظام مع معلومات وعرض مرن.'
+                      : 'إجابة غير صحيحة. يمكنك تجربة سؤال جديد والانتقال إلى الاختبار الكامل.'}
+                  </div>
+                )}
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    to="/quiz"
+                    className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-gold-500 to-gold-600 px-6 py-3 text-sm font-semibold text-dark-950 transition-all hover:shadow-xl"
+                  >
+                    ابدأ الاختبار الكامل
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={resetSampleQuiz}
+                    className="rounded-full border border-gold-500 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-gold-500/10"
+                  >
+                    إعادة التجربة
+                  </button>
+                </div>
               </div>
             </div>
           </motion.div>
