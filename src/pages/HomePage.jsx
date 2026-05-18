@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Headphones, BookOpen, Sparkles, BookOpenCheck } from 'lucide-react';
+import DuaCard from '../components/DuaCard';
 
 const HomePage = () => {
   const features = [
@@ -105,6 +106,56 @@ const HomePage = () => {
 
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-950">
         <div className="mx-auto max-w-6xl text-right">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="glass-dark rounded-[2rem] border border-gold-500/15 p-10 sm:p-12"
+          >
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p className="text-sm text-gold-200 uppercase tracking-[0.3em] mb-4">الاختبار الإسلامي</p>
+                <h2 className="text-3xl font-bold text-white">حان وقت التحدي</h2>
+                <p className="mt-4 text-gray-400 max-w-2xl leading-relaxed">
+                  اختر مستوى السهولة، اختبر معلوماتك، واكتشف حقائق جديدة عن الإسلام. قسم الاختبار مصمم لتثقيفك ويحفزك على التعلم.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <Link
+                    to="/quiz"
+                    className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-gold-500 to-gold-600 px-8 py-3 text-sm font-semibold text-dark-950 shadow-gold transition-all hover:shadow-xl"
+                  >
+                    ابدأ الاختبار الآن
+                  </Link>
+                  <Link
+                    to="/quiz"
+                    className="inline-flex items-center justify-center rounded-full border border-gold-500 px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-gold-500/10"
+                  >
+                    عرض الأسئلة
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {[
+                  { label: 'سهل', value: 'يمكن للجميع البدء به', color: 'bg-green-500/10 text-green-300' },
+                  { label: 'متوسط', value: 'يزيد من تحديك ومعرفتك', color: 'bg-yellow-500/10 text-yellow-300' },
+                  { label: 'صعب', value: 'للمهتمين بالتعمق', color: 'bg-red-500/10 text-red-300' },
+                  { label: 'جميع المستويات', value: 'اختبر نفسك بكل الأسئلة', color: 'bg-purple-500/10 text-purple-300' },
+                ].map((info) => (
+                  <div key={info.label} className={`rounded-3xl border border-gold-500/10 p-6 ${info.color}`}>
+                    <h3 className="text-xl font-semibold mb-2">{info.label}</h3>
+                    <p className="text-gray-300 leading-relaxed">{info.value}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl text-right">
           <div className="glass-dark rounded-[2rem] border border-gold-500/15 p-10 sm:p-12">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div>
@@ -131,6 +182,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      <DuaCard />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
@@ -11,7 +11,6 @@ import PrayerTimesPage from './pages/PrayerTimesPage';
 import TasbeehPage from './pages/TasbeehPage';
 import QuizPage from './pages/QuizPage';
 import ScrollToTop from './components/ScrollToTop';
-import DuaCard from './components/DuaCard';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -48,9 +47,6 @@ function App() {
               <Route path="/quiz" element={<QuizPage />} />
             </Routes>
           </motion.main>
-
-          {/* Dua Section before Footer */}
-          <DuaCard />
 
           <footer className="border-t border-gold-500/10 bg-dark-900/90 text-gray-400 text-center py-4 px-4">
             © 2026 Mohamed Elmallahy

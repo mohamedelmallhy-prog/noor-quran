@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, RotateCcw, Trophy, TrendingUp } from 'lucide-react';
 
@@ -203,6 +203,46 @@ const QUIZ_QUESTIONS = [
     difficulty: 'hard',
     fact: 'سورة التوبة لم تبدأ ببسم الله الرحمن الرحيم، وهي السورة الوحيدة في القرآن بهذه الميزة.',
   },
+  {
+    id: 26,
+    question: 'كم عدد ركعات صلاة العشاء؟',
+    options: ['ركعتان', 'ثلاث ركعات', 'أربع ركعات', 'خمس ركعات'],
+    correct: 2,
+    difficulty: 'easy',
+    fact: 'صلاة العشاء تتكون من أربع ركعات، وهي الركعة الأخيرة من الصلوات المفروضة اليومية. ',
+  },
+  {
+    id: 27,
+    question: 'ما اسم أول مسجد بُني في الإسلام؟',
+    options: ['المسجد الحرام', 'المسجد النبوي', 'مسجد قباء', 'مسجد قبا'],
+    correct: 2,
+    difficulty: 'medium',
+    fact: 'مسجد قباء هو أول مسجد بُني في الإسلام على يد النبي ﷺ عند وصوله إلى المدينة. ',
+  },
+  {
+    id: 28,
+    question: 'من هو الصحابي الذي جمع القرآن في عهد أبي بكر؟',
+    options: ['عمر بن الخطاب', 'عثمان بن عفان', 'أبو بكر الصديق', 'زید بن ثابت'],
+    correct: 3,
+    difficulty: 'medium',
+    fact: 'زید بن ثابت رضي الله عنه كان كاتب الوحي وهو الذي جمع القرآن في عهد أبي بكر الصديق.',
+  },
+  {
+    id: 29,
+    question: 'ما ترجمة كلمة "إسلام"؟',
+    options: ['السلام', 'الاستسلام', 'الإيمان', 'التوحيد'],
+    correct: 1,
+    difficulty: 'medium',
+    fact: 'كلمة الإسلام تعني الاستسلام لله وطاعته، وهو الاسم الذي اختاره الله لأتباع دينه.',
+  },
+  {
+    id: 30,
+    question: 'ما هو اليوم الذي خصه الله بصلاتين في الإسلام؟',
+    options: ['يوم الجمعة', 'يوم العيد', 'يوم السبت', 'يوم الاثنين'],
+    correct: 0,
+    difficulty: 'hard',
+    fact: 'يوم الجمعة له أهمية خاصة في الإسلام، وله صلاة الجمعة التي يحضرها المسلمون جماعة.',
+  },
 ];
 
 export default function QuizPage() {
@@ -216,13 +256,13 @@ export default function QuizPage() {
   const [questionsShuffled, setQuestionsShuffled] = useState([]);
   const [showStats, setShowStats] = useState(false);
 
-  const filteredQuestions = QUIZ_QUESTIONS.filter(
-    (q) => difficulty === 'all' || q.difficulty === difficulty
-  );
+  const getQuestionsByDifficulty = (level) =>
+    QUIZ_QUESTIONS.filter((q) => level === 'all' || q.difficulty === level);
 
   const startQuiz = (selectedDifficulty) => {
+    const filtered = getQuestionsByDifficulty(selectedDifficulty);
+    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
     setDifficulty(selectedDifficulty);
-    const shuffled = [...filteredQuestions].sort(() => Math.random() - 0.5);
     setQuestionsShuffled(shuffled);
     setCurrentQuestion(0);
     setScore(0);
@@ -240,7 +280,7 @@ export default function QuizPage() {
     setShowFact(true);
 
     if (optionIndex === questionsShuffled[currentQuestion].correct) {
-      setScore(score + 1);
+      setScore((prevScore) => prevScore + 1);
     }
   };
 
