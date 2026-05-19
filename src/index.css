@@ -138,3 +138,108 @@ textarea {
     font-size: 14px;
   }
 }
+
+html,
+body,
+#root {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  min-width: 0;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+section,
+.glass,
+.glass-dark,
+.card-responsive {
+  min-width: 0;
+}
+
+.responsive-button {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: clamp(2.6rem, 4.4vw, 3.5rem);
+  }
+
+  .hero-copy,
+  .section-copy {
+    font-size: 1rem;
+  }
+
+  .section-card {
+    padding: 1.25rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(2.2rem, 5vw, 2.9rem);
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+  }
+
+  .hero-cta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .section-stack {
+    gap: 1rem !important;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.95rem;
+  }
+
+  .hero-copy,
+  .section-copy {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .section-padding {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .section-card {
+    padding: 1rem !important;
+  }
+
+  .responsive-button {
+    width: 100%;
+  }
+
+  .navbar-compact {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  .sidebar-panel {
+    width: 100%;
+    max-width: 18rem;
+  }
+}

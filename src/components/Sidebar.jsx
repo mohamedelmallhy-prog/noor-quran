@@ -65,7 +65,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed right-0 top-0 h-screen w-64 bg-dark-800 border-l border-gold-700/20 z-40 flex flex-col"
+            className="fixed right-0 top-0 h-screen w-full max-w-[18rem] bg-dark-800 border-l border-gold-700/20 z-40 flex flex-col sidebar-panel"
           >
             {/* Header */}
             <div className="p-6 border-b border-gold-700/20 flex items-center justify-between">

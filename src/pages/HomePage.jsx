@@ -57,7 +57,7 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,165,116,0.16),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.05),transparent_18%)]" />
         <div className="absolute inset-0 bg-islamic-grid opacity-20" />
 
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-right">
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-right section-padding">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -67,23 +67,23 @@ const HomePage = () => {
             <p className="mb-4 inline-flex rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-1 text-sm text-gold-200">
               منصة القرآن العربية
             </p>
-            <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl xl:text-6xl">
+            <h1 className="text-4xl font-black tracking-tight leading-tight text-white sm:text-5xl xl:text-6xl hero-title">
               احفظ واستمع إلى القرآن الكريم بطريقة احترافية.
             </h1>
-            <p className="mt-6 max-w-2xl text-base text-gray-300 sm:text-lg">
+            <p className="mt-6 max-w-2xl text-base text-gray-300 sm:text-lg section-copy">
               منصة عربية حديثة لقراءة وتلاوة القرآن الكريم مع دعم السور، التلاوات، والترجمات الاحترافية.
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end">
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end hero-cta">
               <Link
                 to="/listen"
-                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-gold-500 to-gold-600 px-8 py-3 text-sm font-semibold text-dark-950 shadow-gold transition-all hover:shadow-xl"
+                className="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-gradient-to-r from-gold-500 to-gold-600 px-8 py-3 text-sm font-semibold text-dark-950 shadow-gold transition-all hover:shadow-xl responsive-button"
               >
                 استمع الآن
               </Link>
               <Link
                 to="/read"
-                className="inline-flex items-center justify-center rounded-full border border-gold-500 px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-gold-500/10"
+                className="inline-flex w-full sm:w-auto items-center justify-center rounded-full border border-gold-500 px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-gold-500/10 responsive-button"
               >
                 ابدأ القراءة
               </Link>
@@ -105,7 +105,7 @@ const HomePage = () => {
             <p className="mt-3 text-gray-400">كل ما تحتاجه لتجربة قرآن مريحة وحديثة باللغة العربية.</p>
           </motion.div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4 feature-grid">
             {features.map((feature) => (
               <motion.div
                 key={feature.title}
@@ -130,7 +130,7 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="glass-dark rounded-[2rem] border border-gold-500/15 p-10 sm:p-12"
+            className="glass-dark rounded-[2rem] border border-gold-500/15 p-8 sm:p-12 section-card"
           >
             <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
               <div>
@@ -180,7 +180,7 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="glass-dark rounded-[2rem] border border-gold-500/15 p-10 sm:p-12"
+            className="glass-dark rounded-[2rem] border border-gold-500/15 p-8 sm:p-12 section-card"
           >
             <div className="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between">
               <div className="max-w-2xl">
@@ -239,7 +239,7 @@ const HomePage = () => {
                   </div>
                 )}
 
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-end">
                   <Link
                     to="/quiz"
                     className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-gold-500 to-gold-600 px-6 py-3 text-sm font-semibold text-dark-950 transition-all hover:shadow-xl"
@@ -249,7 +249,7 @@ const HomePage = () => {
                   <button
                     type="button"
                     onClick={resetSampleQuiz}
-                    className="rounded-full border border-gold-500 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-gold-500/10"
+                    className="w-full sm:w-auto rounded-full border border-gold-500 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-gold-500/10 responsive-button"
                   >
                     إعادة التجربة
                   </button>
@@ -262,7 +262,7 @@ const HomePage = () => {
 
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl text-right">
-          <div className="glass-dark rounded-[2rem] border border-gold-500/15 p-10 sm:p-12">
+          <div className="glass-dark rounded-[2rem] border border-gold-500/15 p-8 sm:p-12 section-card">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <h2 className="text-3xl font-bold text-white">ابدأ رحلتك القرآنية الآن</h2>
@@ -270,16 +270,16 @@ const HomePage = () => {
                   منصة جاهزة للاستخدام مع واجهة مظلمة فاخرة، دعم RTL، وتكامل بيانات الآيات من خدمة القرآن السحابية.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-4 justify-start lg:justify-end">
+              <div className="flex flex-col gap-4 sm:flex-row flex-wrap justify-start lg:justify-end">
                 <Link
                   to="/listen"
-                  className="rounded-full bg-gold-500 px-8 py-3 text-sm font-semibold text-dark-950 transition-all hover:bg-gold-400"
+                  className="w-full sm:w-auto rounded-full bg-gold-500 px-8 py-3 text-sm font-semibold text-dark-950 transition-all hover:bg-gold-400 responsive-button"
                 >
                   استمع الآن
                 </Link>
                 <Link
                   to="/read"
-                  className="rounded-full border border-gold-500 px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-gold-500/10"
+                  className="w-full sm:w-auto rounded-full border border-gold-500 px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-gold-500/10 responsive-button"
                 >
                   اقرأ الآن
                 </Link>

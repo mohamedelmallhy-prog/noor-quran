@@ -11,8 +11,8 @@ const Navbar = ({ onMenuClick }) => {
       transition={{ duration: 0.45 }}
       className="bg-dark-800/90 backdrop-blur-lg border-b border-gold-700/20 sticky top-0 z-20"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 gap-3">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 navbar-compact">
+        <div className="flex items-center justify-between h-14 sm:h-16 gap-2 sm:gap-3">
           <div className="flex items-center gap-3">
             <motion.button
               whileHover={{ scale: 1.08 }}
@@ -31,7 +31,7 @@ const Navbar = ({ onMenuClick }) => {
             </Link>
           </div>
 
-          <div className="hidden md:flex flex-1 max-w-md mx-6">
+          <div className="hidden lg:flex flex-1 max-w-md mx-4">
             <motion.div whileFocus={{ scale: 1.02 }} className="w-full relative">
               <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gold-500" size={18} />
               <input

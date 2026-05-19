@@ -79,7 +79,7 @@ const ReadQuranPage = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.25 }}
-            className="glass-dark rounded-[2rem] p-8 border border-gold-500/20"
+            className="glass-dark rounded-[2rem] p-6 sm:p-8 border border-gold-500/20"
           >
             <div className="text-right mb-8 border-b border-gold-500/10 pb-8">
               <h2 className="text-3xl font-bold text-white mb-2">
@@ -122,10 +122,10 @@ const ReadQuranPage = () => {
             transition={{ delay: 0.35 }}
             className="space-y-6"
           >
-            <div className="glass-dark rounded-[2rem] p-6 border border-gold-500/20">
+            <div className="glass-dark rounded-[2rem] p-6 sm:p-8 border border-gold-500/20">
               <h3 className="text-2xl font-bold text-white mb-3">السور</h3>
               <p className="text-sm text-gray-400 mb-5">اختر السورة لعرض الآيات فوراً.</p>
-              <div className="grid gap-3 max-h-[520px] overflow-y-auto pr-1">
+              <div className="grid gap-3 max-h-[420px] md:max-h-[520px] overflow-y-auto pr-1">
                 {surahList.map((surah) => (
                   <button
                     key={surah.number}
@@ -151,7 +151,7 @@ const ReadQuranPage = () => {
               </div>
             </div>
 
-            <div className="glass-dark rounded-[2rem] p-6 border border-gold-500/20 space-y-3">
+            <div className="glass-dark rounded-[2rem] p-6 sm:p-8 border border-gold-500/20 space-y-3">
               <button
                 type="button"
                 className="w-full flex items-center gap-2 px-4 py-3 rounded-3xl bg-gold-500/20 hover:bg-gold-500/30 text-gold-100 font-semibold transition-all border border-gold-500/30"

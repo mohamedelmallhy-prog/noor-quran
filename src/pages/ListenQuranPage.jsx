@@ -106,9 +106,9 @@ const ListenQuranPage = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.25 }}
-            className="glass-dark rounded-[2rem] p-8 border border-gold-500/20"
+            className="glass-dark rounded-[2rem] p-6 sm:p-8 border border-gold-500/20"
           >
-            <div className="grid gap-6 lg:grid-cols-[1fr_auto] items-center mb-8">
+            <div className="grid gap-6 lg:grid-cols-[1fr_auto] items-start lg:items-center mb-8">
               <div>
                 <p className="text-sm text-gold-400 mb-2">السورة المختارة</p>
                 <h2 className="text-3xl font-bold text-white">
@@ -160,14 +160,14 @@ const ListenQuranPage = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.35 }}
-            className="glass-dark rounded-[2rem] p-6 border border-gold-500/20"
+            className="glass-dark rounded-[2rem] p-6 sm:p-8 border border-gold-500/20"
           >
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-white mb-2">قائمة السور</h3>
               <p className="text-sm text-gray-400">اختر سورة للاستماع بشكل فوري.</p>
             </div>
 
-            <div className="grid gap-3 max-h-[520px] overflow-y-auto pr-1">
+            <div className="grid gap-3 max-h-[420px] md:max-h-[520px] overflow-y-auto pr-1">
               {loading ? (
                 <div className="loader mx-auto" />
               ) : (

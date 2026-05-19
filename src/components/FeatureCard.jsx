@@ -11,7 +11,7 @@ const FeatureCard = ({ icon: Icon, title, description, link, color }) => {
       className="group relative"
     >
       <Link to={link} className="block h-full">
-        <div className="glass-dark h-full rounded-2xl p-6 border border-gold-500/20 hover:border-gold-500/50 transition-all">
+        <div className="glass-dark h-full rounded-2xl p-5 sm:p-6 border border-gold-500/20 hover:border-gold-500/50 transition-all card-responsive">
           {/* Background Glow */}
           <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity bg-gradient-to-br ${color}`} />
 
