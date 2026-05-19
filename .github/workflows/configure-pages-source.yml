@@ -9,19 +9,11 @@ permissions:
   contents: read
   pages: write
 
-# This workflow must use PAGES_PAT for GitHub Pages source configuration.
-# Add a secret named PAGES_PAT with repo + pages:write scopes.
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   set-pages-source:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Validate PAGES_PAT secret
         run: |
           if [ -z "${{ secrets.PAGES_PAT }}" ]; then
@@ -32,53 +24,66 @@ jobs:
       - name: Configure GitHub Pages to use gh-pages branch
         run: |
           set -euo pipefail
-          owner=$(echo "${GITHUB_REPOSITORY}" | cut -d/ -f1)
-          repo=$(echo "${GITHUB_REPOSITORY}" | cut -d/ -f2)
+
+          if [ -z "${GITHUB_REPOSITORY:-}" ]; then
+            echo "ERROR: GITHUB_REPOSITORY is not set"
+            exit 1
+          fi
+
+          owner="${GITHUB_REPOSITORY%%/*}"
+          repo="${GITHUB_REPOSITORY#*/}"
           token="${{ secrets.PAGES_PAT }}"
           payload='{"source":{"branch":"gh-pages","path":"/"}}'
+          out=/tmp/pages.json
 
-          response=$(curl -sS -w "%{http_code}" -o /tmp/pages.json -X PUT \
+          status=$(curl -sS -w "%{http_code}" -o "$out" -X PUT \
             -H "Authorization: token ${token}" \
             -H "Accept: application/vnd.github+json" \
             -H "Content-Type: application/json" \
-            -d "${payload}" \
+            -d "$payload" \
             "https://api.github.com/repos/${owner}/${repo}/pages")
 
-          if [ "$response" = "404" ]; then
+          if [ "$status" = "404" ]; then
             echo "Pages site not found, creating it..."
-            response=$(curl -sS -w "%{http_code}" -o /tmp/pages.json -X POST \
+            status=$(curl -sS -w "%{http_code}" -o "$out" -X POST \
               -H "Authorization: token ${token}" \
               -H "Accept: application/vnd.github+json" \
               -H "Content-Type: application/json" \
-              -d "${payload}" \
+              -d "$payload" \
               "https://api.github.com/repos/${owner}/${repo}/pages")
           fi
 
-          if [ "$response" = "204" ]; then
+          echo "GitHub Pages API status: $status"
+
+          if [ "$status" = "204" ]; then
             echo "GitHub Pages source configured successfully (204 No Content)."
             exit 0
           fi
 
-          if [ "$response" != "200" ] && [ "$response" != "201" ]; then
-            echo "GitHub Pages configuration API call failed with status $response"
-            cat /tmp/pages.json
+          if [ "$status" != "200" ] && [ "$status" != "201" ]; then
+            echo "GitHub Pages configuration API call failed with status $status"
+            cat "$out" || true
             exit 1
           fi
 
-          if [ -s /tmp/pages.json ]; then
-            python - <<'PY'
+          if [ -s "$out" ]; then
+            python3 - <<'PY'
 import json
 from pathlib import Path
 path = Path('/tmp/pages.json')
 try:
     data = json.loads(path.read_text())
-    source = data.get('source') or {}
-    branch = source.get('branch', '<unknown>')
-    path_val = source.get('path', '<unknown>')
-    print(f'GitHub Pages source configured: {branch}{path_val}')
-except Exception as e:
-    print(f'GitHub Pages source configured; response JSON could not be parsed: {e}')
+    source = data.get('source', {}) if isinstance(data, dict) else {}
+    branch = source.get('branch') if isinstance(source, dict) else None
+    path_val = source.get('path') if isinstance(source, dict) else None
+    if branch or path_val:
+        print(f'GitHub Pages source configured: {branch or "<unknown>"}{path_val or ""}')
+    else:
+        print('GitHub Pages source configured, but response did not include source metadata.')
+except Exception as exc:
+    print(f'Response parsed, but JSON parse failed: {exc}')
+    print(path.read_text())
 PY
           else
-            echo "GitHub Pages source configured successfully."
+            echo "GitHub Pages source configured successfully with an empty response body."
           fi
