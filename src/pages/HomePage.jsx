@@ -53,7 +53,7 @@ const HomePage = () => {
 
   return (
     <div className="bg-dark-900">
-      <section className="relative overflow-hidden bg-dark-950 py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-dark-950 py-20 sm:py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,165,116,0.16),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.05),transparent_18%)]" />
         <div className="absolute inset-0 bg-islamic-grid opacity-20" />
 

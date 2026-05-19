@@ -11,6 +11,8 @@
 html {
   scroll-behavior: smooth;
   direction: rtl;
+  min-width: 0;
+  font-size: 16px;
 }
 
 body {
@@ -77,12 +79,14 @@ textarea {
 .glass {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(212, 165, 116, 0.12);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
 
 .glass-dark {
   background: rgba(10, 10, 10, 0.65);
   border: 1px solid rgba(212, 165, 116, 0.16);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
 
@@ -165,9 +169,55 @@ section,
   min-width: 0;
 }
 
+.section-padding {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.section-card {
+  padding: 1.5rem;
+  border-radius: 1.75rem;
+}
+
+.page-section {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.hero-copy,
+.section-copy {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.section-stack {
+  gap: 1.5rem;
+}
+
+.section-title {
+  font-size: 2.4rem;
+}
+
+.navbar-compact {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.sidebar-panel {
+  width: 100%;
+  max-width: 18rem;
+}
+
 .responsive-button {
   width: 100%;
   max-width: 100%;
+}
+
+.backdrop-blur-sm,
+.backdrop-blur-md,
+.backdrop-blur-lg {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 @media (max-width: 1024px) {

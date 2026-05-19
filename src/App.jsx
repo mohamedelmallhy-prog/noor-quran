@@ -25,14 +25,14 @@ function App() {
 
   return (
     <Router>
-      <div className="flex min-h-screen bg-dark-900 text-white">
+      <div className="flex min-h-screen w-full overflow-x-hidden bg-dark-900 text-white">
         <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
 
         <div className="flex-1 flex flex-col overflow-hidden">
           <Navbar onMenuClick={toggleSidebar} sidebarOpen={sidebarOpen} />
 
           <motion.main
-            className="flex-1 overflow-y-auto"
+            className="flex-1 overflow-y-auto overflow-x-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
