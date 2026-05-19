@@ -68,22 +68,22 @@ jobs:
 
           if [ -s "$out" ]; then
             python3 - <<'PY'
-import json
-from pathlib import Path
-path = Path('/tmp/pages.json')
-try:
-    data = json.loads(path.read_text())
-    source = data.get('source', {}) if isinstance(data, dict) else {}
-    branch = source.get('branch') if isinstance(source, dict) else None
-    path_val = source.get('path') if isinstance(source, dict) else None
-    if branch or path_val:
-        print(f'GitHub Pages source configured: {branch or "<unknown>"}{path_val or ""}')
-    else:
-        print('GitHub Pages source configured, but response did not include source metadata.')
-except Exception as exc:
-    print(f'Response parsed, but JSON parse failed: {exc}')
-    print(path.read_text())
-PY
+            import json
+            from pathlib import Path
+            path = Path('/tmp/pages.json')
+            try:
+                data = json.loads(path.read_text())
+                source = data.get('source', {}) if isinstance(data, dict) else {}
+                branch = source.get('branch') if isinstance(source, dict) else None
+                path_val = source.get('path') if isinstance(source, dict) else None
+                if branch or path_val:
+                    print(f'GitHub Pages source configured: {branch or "<unknown>"}{path_val or ""}')
+                else:
+                    print('GitHub Pages source configured, but response did not include source metadata.')
+            except Exception as exc:
+                print(f'Response parsed, but JSON parse failed: {exc}')
+                print(path.read_text())
+            PY
           else
             echo "GitHub Pages source configured successfully with an empty response body."
           fi
