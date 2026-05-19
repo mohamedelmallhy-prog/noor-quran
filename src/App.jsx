@@ -11,6 +11,7 @@ import PrayerTimesPage from './pages/PrayerTimesPage';
 import TasbeehPage from './pages/TasbeehPage';
 import QuizPage from './pages/QuizPage';
 import ScrollToTop from './components/ScrollToTop';
+import FloatingBackButton from './components/FloatingBackButton';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -53,6 +54,7 @@ function App() {
           </footer>
         </div>
 
+        <FloatingBackButton />
         <ScrollToTop />
       </div>
     </Router>
