@@ -77,9 +77,10 @@ const Sidebar = ({ isOpen, onClose }) => {
               </div>
               <button
                 onClick={onClose}
-                className="p-1 hover:bg-gold-700/10 rounded-lg transition-colors lg:hidden"
+                aria-label="إغلاق القائمة"
+                className="absolute top-4 right-4 p-2 hover:bg-gold-700/20 rounded-full transition-all border border-gold-500/20 hover:border-gold-500/50 shadow-lg shadow-black/20 z-50"
               >
-                <X size={20} className="text-gold-500" />
+                <X size={22} className="text-gold-300" />
               </button>
             </div>
 
